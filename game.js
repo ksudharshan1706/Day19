@@ -1,0 +1,37 @@
+const tablebody = document.querySelector('tbody');
+const fun1 = async (company) =>{
+    const response = await fetch(`https://companyenrichment.abstractapi.com/v1/?api_key=7c5f5dbea3b248b792b0c5a4a2d60ce0&domain=${company}.com`)
+    const value = await response.json();
+    console.log(value)
+    
+    const bodyrow = document.createElement('tr');
+    const bodycomp = document.createElement('td');
+    bodycomp.innerText = value.name
+    const bodyFound = document.createElement('td');
+    bodyFound.innerText = value.year_founded
+    
+    const bodyHq = document.createElement('td');
+    bodyHq.innerText = value.country +` ( ${value.locality} )`
+    
+    const bodyDomain = document.createElement('td');
+    bodyDomain.innerText = value.domain
+    
+    const bodyempCount = document.createElement('td');
+    bodyempCount.innerText = value.employees_count
+
+    bodyrow.append(bodycomp,bodyFound,bodyHq,bodyDomain,bodyempCount);
+    tablebody.append(bodyrow)
+    
+}
+
+
+const formEle = document.getElementById('form')
+formEle.addEventListener('submit',(e)=>{
+    e.preventDefault();
+    tablebody.innerText = "";
+    const element =e.target.elements;
+    const inputEle = document.getElementById('company')
+    console.log(inputEle.value)
+    fun1(inputEle.value)
+
+})
