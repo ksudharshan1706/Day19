@@ -7,6 +7,10 @@ const fun1 = async (company) =>{
     const bodyrow = document.createElement('tr');
     const bodycomp = document.createElement('td');
     bodycomp.innerText = value.name
+    if(bodycomp.innerText == ""){
+        window.alert("company not present in API")
+    }
+    else{
     const bodyFound = document.createElement('td');
     bodyFound.innerText = value.year_founded
     
@@ -18,10 +22,10 @@ const fun1 = async (company) =>{
     
     const bodyempCount = document.createElement('td');
     bodyempCount.innerText = value.employees_count
-
+        
     bodyrow.append(bodycomp,bodyFound,bodyHq,bodyDomain,bodyempCount);
     tablebody.append(bodyrow)
-    
+    }
 }
 
 
